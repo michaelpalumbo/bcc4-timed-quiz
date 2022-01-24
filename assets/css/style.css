@@ -15,10 +15,10 @@ button {
 }
 button:hover{
     color: white;
-    background-color:#b300ff;;
+    background-color:#b300ff;
 }
 button:focus{
-    background-color:#b300ff;;
+    background-color:#b300ff;
 }
 input {
     background-color: darkblue;
@@ -26,16 +26,24 @@ input {
 }
 input:hover{
     color: white;
-    background-color:#b300ff;;
+    background-color:#b300ff;
 }
 input:focus{
-    background-color:#b300ff;;
+    background-color:#b300ff;
 }
 
 .name {
     background-color: white;
     color:black;
     justify-content: center;
+}
+.name:hover {
+    background-color: white;
+    color:black;
+}
+.name:focus{
+    background-color: white;
+    color:black;
 }
 
 .center {

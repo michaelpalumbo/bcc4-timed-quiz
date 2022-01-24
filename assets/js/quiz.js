@@ -1,16 +1,15 @@
 // score storage
-// window.localStorage.clear()
 var storage = window.localStorage
-// console.log(storage)
+
 if(!storage.scores){
     // if first time loading page
     window.localStorage.setItem('scores', JSON.stringify([]))
 }
 var scores = JSON.parse(storage.scores)
-
+// timer 
 var timer;
 var time = 60
-
+// questions, multiple-choice options, answer, whether the user got it right or wrong, and how much the question is worth. this way we can edit/add/remove questions and the quiz will adjust
 var quiz = [
     
     {
@@ -63,6 +62,10 @@ var quiz = [
         point: 10
     },
 ]
+var fullScore = 0;
+for(i=0;i<quiz.length;i++){
+    fullScore = fullScore + quiz[i].point
+}
 let container = document.querySelector('.container')
 
 function question(index){
@@ -96,29 +99,33 @@ function question(index){
 }
 
 
-const btnclick = document.querySelector('.container');
+const btnclick = document.querySelector('.opts');
 
 btnclick.addEventListener('click', function (event) {
-    if(event.target.getAttribute("id") === 'start'){
-
+    var response = event.target.getAttribute("data")
+    // $(event.target).css({"color": "red"});
+    console.log(response, quiz[counter].answer)
+    if(response === quiz[counter].answer){
+        quiz[counter].correct = true
     } else {
-        var response = event.target.getAttribute("data")
-        // $(event.target).css({"color": "red"});
-        console.log(response, quiz[counter].answer)
-        if(response === quiz[counter].answer){
-            quiz[counter].correct = true
-        } else {
-            quiz[counter].correct = false
-            
-        }
+        quiz[counter].correct = false
+        
     }
 
 
 });
 
+const namer = document.querySelector('.name');
+
+//when clicking on the name field, remove the sample text
+namer.addEventListener('click', function (event) {
+    $('#name').val('')
+});
+
 const navClick = document.querySelector('.nav');
 var counter = 0
 navClick.addEventListener('click', function (event) {
+    console.log(event.target)
     if(event.target.getAttribute('id') === 'next'){
         if(quiz[counter].correct === false){
             time = time - 10
@@ -160,7 +167,12 @@ function endState(){
             user.score = user.score + quiz[i].point
         }
     } 
-    $("#question").html(`<h2>Your final Score: ${user.score}</h2><p><p>Top Scores:`);
+    if(user.score === fullScore){
+        $("#question").html(`<h2>Your got a perfect score of: ${user.score}!!</h2><p><p>Top Scores:`);
+    } else {
+        $("#question").html(`<h2>Your final score: ${user.score} / ${fullScore}</h2><p><p>Top Scores:`);
+    }
+    
     // push user object into scores array, then run sortScores
     scores.push(user)
     sortScores()
@@ -176,7 +188,7 @@ $('#start').click(function(event){
     user.name = username
     var starting = document.querySelector('.starting')
     starting.innerHTML = ''
-    var naming = document.querySelector('.starting')
+    var naming = document.querySelector('.naming')
     naming.innerHTML = ''
     $('#timer').html(`Time left: ${time} seconds`)
     timer = setInterval(function(){
