@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Timed Quiz</title>
+    <link rel="stylesheet" href="./assets/css/style.css">
+    <script
+  src="https://code.jquery.com/jquery-3.6.0.min.js"
+  integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="
+  crossorigin="anonymous"></script>
+    </head>
+    <body>
+        <div class="starting">
+        Welcome to the programming timed quiz.<br>
+        10 seconds will be deducted from the timer for each incorrect answer.<br>
+        Enter your name, then click start to begin.
+        <br>
+        <input id="name">Name
+        <br>
+        <button id="start">Start</button>
+        </div>
+            <div class="container" id="container">
+                <div id="question">
+                </div>
+                <div id="options">
+                    <ul id="choices">
+
+                    </ul>
+                </div>
+        </div>
+        <div id="scores" class="scores">
+            <ul id="scoreList">
+
+            </ul>
+        </div>
+        <div id="nav" class="nav">
+            
+        </div>
+
+        <div>
+            <h3 id="timer" class="timer">Quiz Time Limit: 60 Seconds</h3>
+        </div>
+        <div>
+            <h4 id="msg" class="msg"></h3>
+        </div>
+
+       
+	<script src="./assets/js/quiz.js"></script>
+  </body>
+</html>
