@@ -57,8 +57,8 @@ var quiz = [
     },
     {
         question: 'Which of the following === "michael34"?',
-        options: [`michael,3,4`, `"michael","3","4"`, `"michael" + "3" + "4"`],
-        answer: `"michael" + "3" + "4"`,
+        options: [`michael,3,4`, `'michael','3',`, `'michael' + '3' + '4'`],
+        answer: `'michael' + '3' + '4'`,
         correct: null,
         point: 10
     },
@@ -78,7 +78,7 @@ function question(index){
 
         for (var i = 0; i < quiz[index].options.length; i++) {
             // New <li> elements are created here and added to the <ul> element.
-            $('#choices').append(`<li data="${quiz[index].options[i]}">${quiz[index].options[i]}</li>`);
+            $('#choices').append(`<li data="${quiz[index].options[i]}"><input type="button" data="${quiz[index].options[i]}" class="signout_btn" value="${quiz[index].options[i]}" id=${quiz[index].options[i]}></li>`);
         }   
         // navigation
         if(index === 0){
@@ -103,7 +103,7 @@ btnclick.addEventListener('click', function (event) {
 
     } else {
         var response = event.target.getAttribute("data")
-        $(event.target).css({"color": "red"});
+        // $(event.target).css({"color": "red"});
         console.log(response, quiz[counter].answer)
         if(response === quiz[counter].answer){
             quiz[counter].correct = true
@@ -176,6 +176,8 @@ $('#start').click(function(event){
     user.name = username
     var starting = document.querySelector('.starting')
     starting.innerHTML = ''
+    var naming = document.querySelector('.starting')
+    naming.innerHTML = ''
     $('#timer').html(`Time left: ${time} seconds`)
     timer = setInterval(function(){
         if(time <= 0){
